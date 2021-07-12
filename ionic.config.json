@@ -1,0 +1,7 @@
+{
+  "name": "ionic-lp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
