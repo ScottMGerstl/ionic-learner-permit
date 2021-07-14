@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { take } from 'rxjs/operators';
 import { Recipe } from '../../models/recipe.interface';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
     selector: 'app-recipe-list-page',
     templateUrl: './recipe-list.page.html',
     styleUrls: ['./recipe-list.page.scss'],
 })
-export class RecipeListPage implements OnInit {
-    data$: Observable<Recipe[]>;
+export class RecipeListPage {
+    data: Recipe[];
 
-    constructor(private readonly route: ActivatedRoute) {}
+    constructor(private readonly recipeService: RecipeService) {}
 
-    ngOnInit() {
-        this.data$ = this.route.snapshot.data.data.data$;
+    ionViewWillEnter() {
+        this.recipeService
+            .getAll()
+            .pipe(take(1))
+            .subscribe((x) => (this.data = x));
     }
 }

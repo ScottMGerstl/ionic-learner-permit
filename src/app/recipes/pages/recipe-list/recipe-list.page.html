@@ -6,7 +6,7 @@
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let item of data$ | async" [routerLink]="item.id">
+        <ion-item *ngFor="let item of data" [routerLink]="item.id">
             <ion-avatar slot="start">
                 <ion-img [src]="item.imageSrc"></ion-img>
             </ion-avatar>
