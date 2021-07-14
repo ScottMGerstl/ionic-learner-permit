@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "ionic-lp",
-	"webDir": "www",
-	"bundledWebRuntime": false
+    "appId": "com.scottmgerstl.ioniclp",
+    "appName": "ionic-lp",
+    "webDir": "www",
+    "bundledWebRuntime": false
 }
