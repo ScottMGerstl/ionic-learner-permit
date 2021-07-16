@@ -1,0 +1,24 @@
+form:not(.submitted) {
+    app-form-control {
+        ion-item.ion-invalid + ion-text {
+            visibility: hidden;
+        }
+    }
+}
+app-form-control {
+    ion-item.ion-valid + ion-text {
+        visibility: hidden;
+    }
+}
+
+.md app-form-control + app-form-control {
+    margin-top: 16px;
+}
+
+app-form-control .error-message {
+    display: block;
+    margin-top: 4px;
+}
+.ios app-form-control .error-message {
+    transform: translateX(20px);
+}

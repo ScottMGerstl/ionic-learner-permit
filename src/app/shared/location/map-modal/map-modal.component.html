@@ -1,0 +1,13 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Add a Location</ion-title>
+        <ion-buttons slot="primary">
+            <ion-button (click)="onCancelClick()">Cancel</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div id="map" [class.loaded]="apiLoaded | async">
+        <google-map *ngIf="apiLoaded | async"></google-map>
+    </div>
+</ion-content>

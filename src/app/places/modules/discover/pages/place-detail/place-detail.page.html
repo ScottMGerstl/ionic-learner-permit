@@ -1,0 +1,32 @@
+<ng-container *ngIf="data">
+    <ion-header>
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button defaultHref="/places/discover"></ion-back-button>
+            </ion-buttons>
+            <ion-title>{{data.title || 'Place Detail'}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-no-padding">
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+                    <ion-img [src]="data.imageSrc" class="" style="object-fit: cover; height: 25vh"></ion-img>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="6" offset-sm="3" class="ion-text-center ion-padding">
+                    <p>{{ data.description }}</p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="6" offset-sm="3" class="ion-padding">
+                    <ion-button color="primary" [disabled]="!canBook" expand="block" (click)="onBookClicked()"
+                        >Book</ion-button
+                    >
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-content>
+</ng-container>

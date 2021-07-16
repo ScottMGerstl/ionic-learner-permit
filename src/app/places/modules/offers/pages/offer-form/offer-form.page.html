@@ -1,0 +1,71 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [defaultHref]="uiConfig.defaultHref(id)"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ uiConfig.title }}</ion-title>
+        <ion-buttons slot="primary">
+            <ion-button (click)="onSubmit()">
+                <ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-grid>
+            <ion-row>
+                <ion-col size-sm="6" offset-sm="3">
+                    <app-form-control label="Title*" errorMessage="A title is required">
+                        <ion-input type="text" formControlName="title" required autocorrect></ion-input>
+                    </app-form-control>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="6" offset-sm="3">
+                    <app-form-control label="Short Description">
+                        <ion-textarea rows="3" formControlName="description"></ion-textarea>
+                    </app-form-control>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="6" offset-sm="3">
+                    <app-form-control label="Price*" errorMessage="A price is required">
+                        <ion-input type="number" formControlName="price" required></ion-input>
+                    </app-form-control>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="3" offset-sm="3">
+                    <app-form-control label="Available From*" errorMessage="Required">
+                        <ion-datetime
+                            [min]="availability.min"
+                            [max]="availability.max"
+                            formControlName="startDate"
+                            required
+                        ></ion-datetime>
+                    </app-form-control>
+                </ion-col>
+                <ion-col size-sm="3">
+                    <app-form-control label="Available To*" errorMessage="Required">
+                        <ion-datetime
+                            [min]="availability.min"
+                            [max]="availability.max"
+                            formControlName="endDate"
+                            required
+                        ></ion-datetime>
+                    </app-form-control>
+                </ion-col>
+            </ion-row>
+            <!-- <ion-row>
+                <ion-col size-sm="6" offset-sm="3">
+                    <ion-item lines="none">
+                        <ion-label>Add a Location</ion-label>
+                        <app-location-picker></app-location-picker>
+                    </ion-item>
+                </ion-col>
+            </ion-row> -->
+        </ion-grid>
+    </form>
+</ion-content>

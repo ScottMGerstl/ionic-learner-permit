@@ -1,0 +1,71 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Book {{ bookFor.title }}</ion-title>
+        <ion-buttons slot="primary">
+            <ion-button (click)="onCancelClick()">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <p class="ion-text-center">{{ bookFor.description }}</p>
+
+    <form [class.submitted]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-grid>
+            <ion-row>
+                <ion-col size-sm="6" offset-sm="3">
+                    <app-form-control label="First name*" errorMessage="First name is required">
+                        <ion-input type="text" formControlName="firstName" required autocorrect></ion-input>
+                    </app-form-control>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="6" offset-sm="3">
+                    <app-form-control label="Last name*" errorMessage="Last name is required">
+                        <ion-input type="text" formControlName="lastName" required autocorrect></ion-input>
+                    </app-form-control>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="6" offset-sm="3">
+                    <app-form-control label="Number of guests*" errorMessage="Count is required">
+                        <ion-select formControlName="guestCount" required>
+                            <ion-select-option value="1">1</ion-select-option>
+                            <ion-select-option value="2">2</ion-select-option>
+                            <ion-select-option value="3">3</ion-select-option>
+                        </ion-select>
+                    </app-form-control>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="3" offset-sm="3">
+                    <app-form-control label="Book from*" errorMessage="Required">
+                        <ion-datetime
+                            display-format="MMM DD, YYYY"
+                            picker-format="YY MMM DD"
+                            [min]="bookFor.startDate"
+                            [max]="bookFor.endDate"
+                            formControlName="startDate"
+                            required
+                        ></ion-datetime>
+                    </app-form-control>
+                </ion-col>
+                <ion-col size-sm="3">
+                    <app-form-control label="Book to*" errorMessage="Required">
+                        <ion-datetime
+                            [disabled]="!form.controls.startDate.value"
+                            display-format="MMM DD, YYYY"
+                            picker-format="YY MMM DD"
+                            [min]="form.controls.startDate.value"
+                            [max]="bookFor.endDate"
+                            formControlName="endDate"
+                            required
+                        ></ion-datetime>
+                    </app-form-control>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-button color="primary" expand="block" type="submit">Book</ion-button>
+    </form>
+</ion-content>

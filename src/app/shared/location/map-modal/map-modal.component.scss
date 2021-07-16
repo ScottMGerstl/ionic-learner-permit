@@ -1,0 +1,12 @@
+#map {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity 200ms ease-in;
+
+    &.loaded {
+        opacity: 1;
+    }
+}

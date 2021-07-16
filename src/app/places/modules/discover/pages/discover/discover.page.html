@@ -1,0 +1,119 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Discover</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-segment value="all" (ionChange)="onFilterChange($event)">
+        <ion-segment-button value="all">All Places</ion-segment-button>
+        <ion-segment-button value="bookable">Bookable Places</ion-segment-button>
+    </ion-segment>
+
+    <ion-grid *ngIf="(!filteredData || filteredData.length < 1) && !loading">
+        <ion-row>
+            <ion-col size="12" size-md="8" offset-md="2" class="ion-text-center">
+                <p>There are no places available for booking. Try again later</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="filteredData && filteredData.length > 0">
+        <ion-row>
+            <ion-col size="12" size-md="8" offset-md="2" class="ion-text-center">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>{{ filteredData[0].title }}</ion-card-title>
+                        <ion-card-subtitle>{{ filteredData[0].price | currency }} / Night</ion-card-subtitle>
+                    </ion-card-header>
+                    <ion-img [src]="filteredData[0].imageSrc"></ion-img>
+                    <ion-card-content>
+                        <p>{{ filteredData[0].description }}</p>
+                    </ion-card-content>
+                    <div class="card-footer ion-text-right">
+                        <ion-button
+                            fill="clear"
+                            color="primary"
+                            routerDirection="forward"
+                            [routerLink]="['/', 'places', 'discover', filteredData[0].id]"
+                            >View</ion-button
+                        >
+                    </div>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" size-md="8" offset-md="2">
+                <ion-list>
+                    <ion-item
+                        detail
+                        *ngFor="let item of filteredData.slice(1)"
+                        routerDirection="forward"
+                        [routerLink]="['/', 'places', 'discover', item.id]"
+                    >
+                        <ion-thumbnail slot="start">
+                            <ion-img [src]="item.imageSrc"></ion-img>
+                        </ion-thumbnail>
+                        <ion-label>
+                            <h2>{{ item.title }}</h2>
+                            <p>{{ item.description }}</p>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="loading && !filteredData">
+        <ion-row>
+            <ion-col size="12" size-md="8" offset-md="2" class="ion-text-center">
+                <ion-skeleton-text animated style="width: 90%; height: 40vh; margin: 20px auto"></ion-skeleton-text>
+
+                <ion-list>
+                    <ion-item class="ion-padding-top">
+                        <ion-thumbnail slot="start">
+                            <ion-skeleton-text animated></ion-skeleton-text>
+                        </ion-thumbnail>
+                        <ion-label>
+                            <h3>
+                                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                            </h3>
+                            <p>
+                                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                            </p>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-thumbnail slot="start">
+                            <ion-skeleton-text animated></ion-skeleton-text>
+                        </ion-thumbnail>
+                        <ion-label>
+                            <h3>
+                                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                            </h3>
+                            <p>
+                                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                            </p>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-thumbnail slot="start">
+                            <ion-skeleton-text animated></ion-skeleton-text>
+                        </ion-thumbnail>
+                        <ion-label>
+                            <h3>
+                                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                            </h3>
+                            <p>
+                                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                            </p>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
